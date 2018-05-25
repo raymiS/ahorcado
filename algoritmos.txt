@@ -1,0 +1,16 @@
+Ahorcado
+
+Tienes que adivinar una palabra por lo que la consola te pedirá que ingreses una letra, si la letra se encuentra dentro de la palabra, se ingresará la letra, si no existe la letra dentro de la palabra se agregará a un acumulador 
+
+si ese acumulador llega a la cantidad total de letras en la palabra, el usuario ha perdido, si el usuario adivina la palabra habrá ganado
+
+necesito
+  palabra
+  contador_perdidas
+  jugador 1
+  jugador 2
+ 
+
+mientras la palabra no esté completada y el contador_perdidas haya llegado a su límite se puede seguir jugando
+  si la letra ingresada por el jugador está incluida en la palabra, se colocará en la posición que corresponda
+  si la letra ingresada por el jugador no está incluida en la palabra el contador de perdidas irá acumulando
