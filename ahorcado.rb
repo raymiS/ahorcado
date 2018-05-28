@@ -3,6 +3,7 @@ class Hangman
     @current_word = current_word
     @word_spaces = Array.new(current_word.length, "")
     @current_characters = current_word.split("")
+    @loser_count = 0
 
     display_game
   end
@@ -17,24 +18,38 @@ class Hangman
     @word_spaces.include?("")
   end
 
+  def has_player_lost
+    if @loser_count == @word_spaces.length
+      puts "There's no more chances. You have lost"
+      return true
+    else 
+      return false
+    end
+  end
+
   def choose_character
-    while is_character_space_empty? do
+    while is_character_space_empty? && !has_player_lost do
       puts "Guess the word! Choose a letter"
       chosen_character = gets.chomp
 
       insert_character(chosen_character)
+    end
+
+    if !is_character_space_empty?
+      puts "Winner! #{@word_spaces}"
     end
   end
 
   def insert_character(chosen_character)
     if @current_word.include?(chosen_character)
       position = @current_characters.index(chosen_character)
-      @word_spaces[position] = chosen_character
-  
-      puts "Word Spaces: #{@word_spaces}"
+      @word_spaces[position] = chosen_character  
     else 
       puts "Nope, keep playin"
+      @loser_count += 1
     end
+
+    has_player_lost
   end
 end 
 
