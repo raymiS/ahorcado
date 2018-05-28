@@ -14,7 +14,7 @@ class Hangman
   end
 
   def is_character_space_empty?
-    @word_spaces.any? { |w| w == "" }
+    @word_spaces.include?("")
   end
 
   def choose_character
