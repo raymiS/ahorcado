@@ -24,8 +24,6 @@ class Hangman
       chosen_character = gets.chomp
 
       insert_character(chosen_character)
-
-      puts "#{word_spaces_empty?}"
     end
   end
 
