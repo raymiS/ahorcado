@@ -1,4 +1,4 @@
-class Ahorcado
+class Hangman
   def initialize(current_word)
     @current_word = current_word
     @word_spaces = Array.new(current_word.length, "")
@@ -41,4 +41,4 @@ class Ahorcado
   end
 end 
 
-new_game = Ahorcado.new("lovers")
+new_game = Hangman.new("lovers")
