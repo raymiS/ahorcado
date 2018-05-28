@@ -19,7 +19,7 @@ def display_game
 end
 
 def word_spaces_empty?
-  @word_spaces.all? { |w| w == "" }
+  @word_spaces.any? { |w| w == "" }
 end
 
 def choose_character
