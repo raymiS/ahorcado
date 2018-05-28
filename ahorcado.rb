@@ -14,12 +14,12 @@ class Hangman
     choose_character
   end
 
-  def word_spaces_empty?
+  def is_character_space_empty?
     @word_spaces.any? { |w| w == "" }
   end
 
   def choose_character
-    while word_spaces_empty? do
+    while is_character_space_empty? do
       puts "Guess the word! Choose a letter"
       chosen_character = gets.chomp
 
