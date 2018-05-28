@@ -11,7 +11,6 @@ class Hangman
     @word_spaces.each do |characters|
       print "| #{characters} | "
     end
-    choose_character
   end
 
   def is_character_space_empty?
@@ -40,3 +39,4 @@ class Hangman
 end 
 
 new_game = Hangman.new("lovers")
+new_game.choose_character
