@@ -32,7 +32,10 @@ class Hangman
       puts "Guess the word! Choose a letter"
       chosen_character = gets.chomp
 
-      insert_character(chosen_character)
+      unless insert_character(chosen_character)
+        puts "Nope, keep playing baby."
+        @loser_count += 1
+      end
     end
 
     if !is_character_space_empty?
@@ -43,13 +46,10 @@ class Hangman
   def insert_character(chosen_character)
     if @current_word.include?(chosen_character)
       position = @current_characters.index(chosen_character)
-      @word_spaces[position] = chosen_character  
+      @word_spaces[position] = chosen_character
     else 
-      puts "Nope, keep playin"
-      @loser_count += 1
+      false
     end
-
-    has_player_lost
   end
 end 
 
