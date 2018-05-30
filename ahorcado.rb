@@ -27,7 +27,7 @@ class Hangman
     end
   end
 
-  def choose_character
+  def start_game
     while is_character_space_empty? && !has_player_lost do
       puts "Guess the word! Choose a letter"
       chosen_character = gets.chomp
@@ -54,4 +54,4 @@ class Hangman
 end 
 
 new_game = Hangman.new("lovers")
-new_game.choose_character
+new_game.start_game
