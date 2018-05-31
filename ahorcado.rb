@@ -3,7 +3,7 @@ class Hangman
     @game_word = game_word
     @word_spaces = Array.new(game_word.length, "")
     @current_characters = game_word.split("")
-    @loser_count = 0
+    @player_guess_chances = 0
 
     display_game
   end
@@ -19,7 +19,7 @@ class Hangman
   end
 
   def has_player_lost
-    if @loser_count == @word_spaces.length
+    if @player_guess_chances == @word_spaces.length
       return true
     else 
       return false
@@ -33,7 +33,7 @@ class Hangman
 
       unless insert_character(chosen_character)
         puts "Nope, keep playing baby."
-        @loser_count += 1
+        @player_guess_chances += 1
       end
     end
 
