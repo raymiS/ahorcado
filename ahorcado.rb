@@ -14,7 +14,7 @@ class Hangman
     end
   end
 
-  def is_character_space_empty?
+  def is_word_spaces_arr_empty?
     @word_spaces.include?("")
   end
 
@@ -28,7 +28,7 @@ class Hangman
   end
 
   def start_game
-    while is_character_space_empty? && !has_player_lost do
+    while is_word_spaces_arr_empty? && !has_player_lost do
       puts "Guess the word! Choose a letter"
       chosen_character = gets.chomp
 
@@ -38,7 +38,7 @@ class Hangman
       end
     end
 
-    if !is_character_space_empty?
+    if !is_word_spaces_arr_empty?
       puts "Winner! #{@word_spaces}"
     end
   end
