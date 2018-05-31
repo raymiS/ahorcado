@@ -20,7 +20,6 @@ class Hangman
 
   def has_player_lost
     if @loser_count == @word_spaces.length
-      puts "There's no more chances. You have lost"
       return true
     else 
       return false
@@ -38,8 +37,10 @@ class Hangman
       end
     end
 
-    if !is_word_spaces_arr_empty?
-      puts "Winner! #{@word_spaces}"
+    if has_player_lost
+      puts "There's no more chances. You have lost"
+    else
+      puts "We have a winner! #{@word_spaces}"
     end
   end
 
