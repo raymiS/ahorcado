@@ -1,8 +1,8 @@
 class Hangman
-  def initialize(current_word)
-    @current_word = current_word
-    @word_spaces = Array.new(current_word.length, "")
-    @current_characters = current_word.split("")
+  def initialize(game_word)
+    @game_word = game_word
+    @word_spaces = Array.new(game_word.length, "")
+    @current_characters = game_word.split("")
     @loser_count = 0
 
     display_game
@@ -45,7 +45,7 @@ class Hangman
   end
 
   def insert_character(chosen_character)
-    if @current_word.include?(chosen_character)
+    if @game_word.include?(chosen_character)
       position = @current_characters.index(chosen_character)
       @word_spaces[position] = chosen_character
     else 
