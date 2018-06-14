@@ -1,26 +1,8 @@
-require 'ruby2d'
-
-class Messages
-  extend Ruby2D::DSL
-
-  message_1 = Text.new(x: 0, y: 0, text: "Hello World!", size: 20)
-end
-
-class BlankSpaces
-  def initialize(x, y)
-    extend Ruby2D::DSL
-    
-    @word_square = Square.new(x: x, y: y, size: 150, color: 'green')
-  end 
-end
-
-@draw_spaces = BlankSpaces.new(200, 100)
-
 class Hangman
   MAX_PLAYER_TURNS = 6
   def initialize(game_word)
     @game_word = game_word
-    @word_spaces = Array.new(game_word.length, @draw_spaces)
+    @word_spaces = Array.new(game_word.length, "")
     @current_characters = game_word.split("")
     @player_guess_chances = MAX_PLAYER_TURNS
   end
@@ -67,7 +49,7 @@ class Hangman
   end
 
   def has_player_lost
-    if @player_guess_chances == @word_spaces.length
+    if @player_guess_chances == 0
       return true
     else 
       return false
@@ -77,8 +59,7 @@ class Hangman
   def player_still_on_game
     !has_player_lost
   end
->>>>>>> e8eaddc... Add ruby2D for messages and blank spaces
-end 
+end
 
 new_game = Hangman.new("friends")
 new_game.display_game
