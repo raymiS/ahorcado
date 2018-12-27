@@ -1,62 +1,66 @@
-#TODO: word_spaces should depend from current_word
-# Array equivalent to the characters of the word 
-# [“”, “”, “”, “”, ...]
-# []
-# Array.new
-
-#current_word = "love"
-#word_spaces = Array.new(current_word.length, "")
-
-@current_word = "friends"
-@word_spaces = Array.new(@current_word.length, "")
-@current_characters = @current_word.split("")
-
-def display_game
-  @word_spaces.each do |characters|
-    print "| #{characters} | "
+class Hangman
+  MAX_PLAYER_TURNS = 6
+  def initialize(game_word)
+    @game_word = game_word
+    @word_spaces = Array.new(game_word.length, "")
+    @current_characters = game_word.split("")
+    @player_guess_chances = MAX_PLAYER_TURNS
   end
-  choose_character
-end
 
-def word_spaces_empty?
-  @word_spaces.all? { |w| w == "" }
-end
+  def display_game
+    @word_spaces.each do |characters|
+      print "| #{characters} |"
+    end
+  end
 
-def choose_character
-  while word_spaces_empty? do
-    puts "Guess the word! Choose a letter"
-    chosen_character = gets.chomp
+  def start_game
+    while is_word_spaces_arr_empty? && player_still_on_game do
+      puts "\nGuess the word! Choose a letter"
+      chosen_character = gets.chomp
 
-    puts "#{chosen_character}"
+      unless insert_character(chosen_character)
+        @player_guess_chances -= 1
+        
+        if @player_guess_chances >= 1
+          puts "Nope, keep playin, baby. You got #{@player_guess_chances} more chances"
+        end
+      end
+    end
 
-    insert_character(chosen_character)
+    if has_player_lost
+      puts "There's no more chances. You have lost"
+    else
+      puts "\nWe have a winner!"
+    end
+  end
+
+  def insert_character(chosen_character)
+    if @game_word.include?(chosen_character)
+      position = @current_characters.index(chosen_character)
+      @word_spaces[position] = chosen_character
+      display_game
+    else 
+      false
+    end
+  end
+
+  def is_word_spaces_arr_empty?
+    @word_spaces.include?("")
+  end
+
+  def has_player_lost
+    if @player_guess_chances == 0
+      return true
+    else 
+      return false
+    end
+  end
+
+  def player_still_on_game
+    !has_player_lost
   end
 end
 
-def insert_character(chosen_character)
-  if @current_word.include?(chosen_character)
-    position = @current_characters.index(chosen_character)
-    @word_spaces[position] = chosen_character
-
-    puts "Word Spaces: #{@word_spaces}"
-  else 
-    puts "Nope, keep playin"
-  end
-end
-
-display_game
-
-# current_word = “loop”
-# current_characters = [“l”, “o”, “v”, “e”]
-#  -> each_with_index   could be, but pushing it
-#  -> find_index        perhaps, but could bring trouble in the future
-#  -> index
-# words_spaces = [“”, “”, “”, “”]
-# chosen_character = “o”
-#
-# chosen_character *must appear* in word_spaces in the *position* that it holds in current_word
-# position = current_characters.index(chosen_character)
-# word_spaces[position] = chosen_character
-# word_spaces = [“”, “o”, “”, “”]
-
-#puts word_board_empty(word_board)
+new_game = Hangman.new("friends")
+new_game.display_game
+new_game.start_game
